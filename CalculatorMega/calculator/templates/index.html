@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Interest Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for Simple Interest Calculator */
+
+        /* Navbar */
+        .navbar-custom {
+            background-color: #aed9e0; /* Baby blue */
+        }
+
+        .navbar-custom .navbar-brand, .navbar-custom .navbar-text {
+            color: #333; /* Dark grey */
+        }
+
+        .navbar-custom .nav-link {
+            color: #333; /* Dark grey */
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #007bff; /* Primary blue */
+        }
+
+        /* Container */
+        .container {
+            margin-top: 50px;
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #007bff; /* Primary blue */
+            margin-bottom: 40px;
+        }
+
+        /* Main content section */
+        .content-section {
+            background-color: #f2f9fb; /* Lighter baby blue */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form */
+        form {
+            margin-bottom: 20px;
+        }
+
+        /* Table */
+        .table {
+            margin-top: 20px;
+            border: 1px solid #aed9e0; /* Baby blue */
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Table headers */
+        .table th {
+            background-color: #007bff; /* Primary blue */
+            color: #fff; /* White */
+            padding: 12px;
+            font-weight: bold;
+        }
+
+        /* Table cells */
+        .table td, .table th {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #aed9e0; /* Baby blue */
+        }
+
+        /* Alternating rows */
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f9fb; /* Lighter baby blue */
+        }
+
+        /* Calculate button */
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff; /* Primary blue */
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            color: #fff; /* White */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker primary blue */
+        }
+
+        /* Form fields */
+        input[type="number"] {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #aed9e0; /* Baby blue */
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff; /* Primary blue */
+            outline: none;
+        }
+
+        /* Form labels */
+        label {
+            font-weight: bold;
+            color: #333; /* Dark grey */
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            margin-top: 40px;
+            color: #6c757d; /* Dark grey */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Simple Interest Calculator</h1>
+
+        <!-- Main content section -->
+        <div class="row">
+            <div class="col-md-6 offset-md-3 content-section">
+                <!-- Form -->
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Calculate</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Principal</th>
+                                <th>Rate</th>
+                                <th>Time</th>
+                                <th>Interest</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for calculation in calculations %}
+                            <tr>
+                                <td>{{ calculation.principal }}</td>
+                                <td>{{ calculation.rate }}%</td>
+                                <td>{{ calculation.time }}</td>
+                                <td>{{ calculation.result }}</td>
+                                <td>{{ calculation.timestamp }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">
+        <p>Developed by Michelle Dsouza
